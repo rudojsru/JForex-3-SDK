@@ -1,0 +1,70 @@
+2020-02-16 09:07:53.268 INFO  singlejartest.Main - Connecting...
+2020-02-16 09:07:53.533 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - environment(jnlp.client.mode)=DEMO, platformInstanceId=null
+2020-02-16 09:07:53.543 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - Auth step 1 request [40BF1FC597D59FE4B6D25A19420D3F6C0A8F3704]
+2020-02-16 09:07:53.544 DEBUG com.dukascopy.api.impl.connect.AuthorizationClient - >> [https://login.dukascopy.com/authorization-1/demo/auth?munus=srp_api&passus=1&sermo=053a166c-f83b-4e2b-98bf-9feb8b3a6913&putent_genus=0&appello=40BF1FC597D59FE4B6D25A19420D3F6C0A8F3704&obsecro_id=d0d1e367-a62a-4e36-986c-14f70028efa6&srp_versio=1]
+2020-02-16 09:07:54.331 DEBUG com.dukascopy.api.impl.connect.AuthorizationClient - << [{"B":"65acc661eba11ee34e88326a937fe5e250e4e5b86f6a0a31c2bf5264161ad5f283a76a3b4397b7860291633398af7e3766448a6248030de7dac7fc42af3820a8b5bc617aa6225fa2cb50555537ad3e099df97dc9c00e3dcdfd23adff2d8e4d18e4ea8e77d469d48cadc0d66c92e21582ad3cee0839fcbfb0aeab3c9e0bdd863cf71d286d997006c1952642ef6afa1801b7eecbea47024625fba62b71da847c9c7471ad09b5ddf40fa1bf9f0aa7e9afe9dee784bd34d3e3502d56724c3d2d337d7898ffaf826067c4cb47aed149c26fdb1ad479c48ea362bee23a657e046fe11830ed4313d763c561e461e902a442016fe7170e7ec28a817bd6f28e113fa72d48","S":"d1c6804264e682a3302c5aafd1a4e2d","G":"2","H":"SHA-256","K":"5b9e8ef059c6b32ea59fc1d322d37f04aa30bae5aa9003b8321e21ddb04e300","N":"ac6bdb41324a9a9bf166de5e1389582faf72b6651987ee07fc3192943db56050a37329cbb4a099ed8193e0757767a13dd52312ab4b03310dcd7f48a9da04fd50e8083969edb767b0cf6095179a163ab3661a05fbd5faaae82918a9962f0b93b855f97993ec975eeaa80d740adbf4ff747359d041d5c33ea71d281e446b14773bca97b43a23fb801676bd207a436c6481f1d2b9078717461a5b9d32e688f87748544523b524b0d57d5ea77a2775d2ecfa032cfbdbf52fb3786160279004e57ae6af874e7303ce53299ccc041c7bc308d82a5698f3a8d0c38271ae35f8e9dbfbb694b5c803d89f7ae435de236d525f54759b65e372fcd68ef20fa7111f9e4aff73","srp_versio":"1"}]
+2020-02-16 09:07:54.332 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - Auth step 1 response [ServerResponseObject [passwordServerResponse=Step1ServerResponse [serverPublicValueB=65acc661eba11ee34e88326a937fe5e250e4e5b86f6a0a31c2bf5264161ad5f283a76a3b4397b7860291633398af7e3766448a6248030de7dac7fc42af3820a8b5bc617aa6225fa2cb50555537ad3e099df97dc9c00e3dcdfd23adff2d8e4d18e4ea8e77d469d48cadc0d66c92e21582ad3cee0839fcbfb0aeab3c9e0bdd863cf71d286d997006c1952642ef6afa1801b7eecbea47024625fba62b71da847c9c7471ad09b5ddf40fa1bf9f0aa7e9afe9dee784bd34d3e3502d56724c3d2d337d7898ffaf826067c4cb47aed149c26fdb1ad479c48ea362bee23a657e046fe11830ed4313d763c561e461e902a442016fe7170e7ec28a817bd6f28e113fa72d48, saltS=d1c6804264e682a3302c5aafd1a4e2d, safePrimeN=ac6bdb41324a9a9bf166de5e1389582faf72b6651987ee07fc3192943db56050a37329cbb4a099ed8193e0757767a13dd52312ab4b03310dcd7f48a9da04fd50e8083969edb767b0cf6095179a163ab3661a05fbd5faaae82918a9962f0b93b855f97993ec975eeaa80d740adbf4ff747359d041d5c33ea71d281e446b14773bca97b43a23fb801676bd207a436c6481f1d2b9078717461a5b9d32e688f87748544523b524b0d57d5ea77a2775d2ecfa032cfbdbf52fb3786160279004e57ae6af874e7303ce53299ccc041c7bc308d82a5698f3a8d0c38271ae35f8e9dbfbb694b5c803d89f7ae435de236d525f54759b65e372fcd68ef20fa7111f9e4aff73, correspondingGeneratorG=2, hashAlgorithmH=SHA-256, srpProtocolVersion=1], ]]
+2020-02-16 09:07:54.416 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - Auth step 2 request A [14413342341120386783259933039288992785126750576909535611417225516012102211152873533885218083971248317154365786583977685361510944795271401894020438088126222055904577635258475038483008760686296825858118044741777661717672873964591736193198142097359349974211493135343970498887730653717507988769517735471735320466881553908086892369006529813941164959600073573299535501673800424445829345165776705196527526081016659923134454385149931532108117790525046289470121901088546815300830762181812832903449128117287149250698175413908493503595163205714788263404426124894294993023464687457674477161946771256521370260765789964423726092015], M1 [23329389343776997787154003586141901732338481234209650084464431643625163586402]
+2020-02-16 09:07:54.416 DEBUG com.dukascopy.api.impl.connect.AuthorizationClient - >> [https://login.dukascopy.com/authorization-1/demo/auth?munus=srp_api&testimonium_nuntius=3393f768750a8d3a49206278694a4c094f8afa1d54788cca967f2440372ffb62&passus=2&publicus_pendo=722cf8576f559563859bd60f46f290c1ca37befe31309f3dfa38229ab8e4e99df011adef59e8cfec94c58bff3b19fad70f2f3213b7651bd3339bf386f62c4109b21faf4d9a553476910e3be7f354555bd06d3d56062206c835aa0e5d2bca14a168be0a2c10a55083b60394db6914f4a08cf12b5989c87ad104fb9dd9b283dc530e9b09cfc3bf2b4405b26e57ab264bc7df51cdbb8296f25f2b2fd90128f7f163d4de591b122437f04fb708611e871b8670bcba29b502ff57b96fa86864314f856c9e340757133ecfea6b07d7987cac4f81162d2b9147dbcfc5cce74ec48411347ab5b89ef7c153930ee69769c71c0a797204462d0f310445e0be80ab67b7ceef&sermo=053a166c-f83b-4e2b-98bf-9feb8b3a6913&putent_genus=0&obsecro_id=d0d1e367-a62a-4e36-986c-14f70028efa6&srp_versio=1]
+2020-02-16 09:07:54.936 DEBUG com.dukascopy.api.impl.connect.AuthorizationClient - << [{"M2":"9680d9589c4f15d42e090cedef3bee6b5aaa7c3976197d3509489cf2af792c06","srp_versio":"1"}]
+2020-02-16 09:07:54.936 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - Auth step 2 response [ServerResponseObject [passwordServerResponse=Step2ServerResponse [serverEvidenceMessageM2=9680d9589c4f15d42e090cedef3bee6b5aaa7c3976197d3509489cf2af792c06, srpProtocolVersion=1], ]]
+2020-02-16 09:07:54.937 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - Auth step 3 request
+2020-02-16 09:07:54.937 DEBUG com.dukascopy.api.impl.connect.AuthorizationClient - >> [https://login.dukascopy.com/authorization-1/demo/auth?munus=srp_api&passus=3&sermo=053a166c-f83b-4e2b-98bf-9feb8b3a6913&versio=318.4.87&willPing=true&occasus_content_vulgate=0&putent_genus=0&occasus=true&platform=DDS3_JFOREXSDK&obsecro_id=d0d1e367-a62a-4e36-986c-14f70028efa6&srp_versio=1]
+2020-02-16 09:07:55.921 DEBUG com.dukascopy.api.impl.connect.AuthorizationClient - << [{"occasus":"rO0ABXNyABRqYXZhLnV0aWwuUHJvcGVydGllczkS0HpwNj6YAgABTAAIZGVmYXVsdHN0ABZMamF2\r\nYS91dGlsL1Byb3BlcnRpZX...","authApiURLs":["d-ja-gva-91-191.dukascopy.com:10443","d-ja-usa-e-97-4-b.dukascopy.com:10443","d-ja-sgn-04-a.dukascopy.com:10443","d-ja-jpn-102-100-c.dukascopy.com:10443","d-ja-hk-110-05.dukascopy.ch:10443","d-ja-msk-10.dukascopy.com:10443","d-ja-hk-111-4.dukascopy.ch:10443"],"srp_versio":"1"}]
+2020-02-16 09:07:55.930 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - Auth step 3 response [ServerResponseObject [passwordServerResponse=Step3ServerResponse [serverResponse={"occasus":"rO0ABXNyABRqYXZhLnV0aWwuUHJvcGVydGllczkS0HpwNj6YAgABTAAIZGVmYXVsdHN0ABZMamF2\r\nYS91dGlsL1Byb3BlcnRpZX...","authApiURLs":["d-ja-gva-91-191.dukascopy.com:10443","d-ja-usa-e-97-4-b.dukascopy.com:10443","d-ja-sgn-04-a.dukascopy.com:10443","d-ja-jpn-102-100-c.dukascopy.com:10443","d-ja-hk-110-05.dukascopy.ch:10443","d-ja-msk-10.dukascopy.com:10443","d-ja-hk-111-4.dukascopy.ch:10443"],"srp_versio":"1"}], responseHeaderFields={Transfer-Encoding=[chunked], null=[HTTP/1.1 200], idle-session-ttl=[900000], CF-RAY=[565e07d98c18ffd4-WAW], Server=[cloudflare], Connection=[keep-alive], Client-Country=[PL], Pragma=[no-cache], Last-Modified=[Sun, 16 Feb 2020 08:07:55 GMT], Date=[Sun, 16 Feb 2020 08:07:55 GMT], CF-Cache-Status=[DYNAMIC], Cache-Control=[no-cache, must-revalidate, no-store, max-age=0], Access-Control-Allow-Credentials=[true], Client-IP=[37.47.197.228], Vary=[Accept-Encoding], Set-Cookie=[__cfduid=db866040a3914d993770e3194032f6c091581840475; expires=Tue, 17-Mar-20 08:07:55 GMT; path=/; domain=.dukascopy.com; HttpOnly; SameSite=Lax], Expires=[Thu, 01 Jan 1970 00:00:00 GMT], Expect-CT=[max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"], Content-Type=[text/plain;charset=UTF-8]}]]
+2020-02-16 09:07:56.074 INFO  com.dukascopy.api.impl.connect.AuthorizationClient - APIC: Ping API server URLs synchronously
+2020-02-16 09:07:56.075 INFO  com.dukascopy.api.impl.connect.PingHelper - Selecting the best server...
+2020-02-16 09:07:56.372 INFO  com.dukascopy.api.impl.connect.PingHelper - The ping start time=2020-02-16 09:07:56:372
+2020-02-16 09:07:56.706 INFO  com.dukascopy.api.impl.connect.PingHelper - The ping end time=2020-02-16 09:07:56:706, the ping processing time=[334]ms
+2020-02-16 09:07:56.706 DEBUG com.dukascopy.api.impl.connect.PingHelper - Best api url [d-ja-gva-91-191.dukascopy.com:10443] with time [74]
+2020-02-16 09:07:56.707 INFO  com.dukascopy.dds2.greed.ping.ApiServerManager - APIC: The ping is finished, the fastest API server is saved: d-ja-gva-91-191.dukascopy.com:10443 (74 ms)
+2020-02-16 09:07:56.707 DEBUG com.dukascopy.api.impl.connect.DCClientImpl - d-ja-gva-91-191.dukascopy.com:10443@daa6bd9db64449815fb0a998d4c92296ce491417b46ca1916ec5609746d18e82
+2020-02-16 09:07:56.709 DEBUG com.dukascopy.api.impl.connect.DCClientImpl - UserAgent: {"clientType":"DDS3_JFOREXSDK","javaVersion":"11.0.5","jvmVersion":"11.0.5+10-b520.17","clientVersion":"318.4.87","osName":"Linux"}
+2020-02-16 09:07:57.238 INFO  com.dukascopy.dds2.greed.util.FilePathManager - WL info is unavailable. Use default App folder for Platform data:  /home/rudojs/JForex
+2020-02-16 09:07:57.631 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - InstrumentManager created.
+2020-02-16 09:07:57.880 WARN  com.dukascopy.api.impl.connect.WLabelData - White Label Image is not received
+2020-02-16 09:07:58.326 INFO  com.dukascopy.dds2.greed.connection.GreedClientAuthorizationProvider - !!!:Thread[(DDS2 Standalone Transport Client) ClientConnector,5,main]
+2020-02-16 09:07:58.329 INFO  com.dukascopy.dds4.transport.client.netty.ClientConnector - Authorize task in queue, server address [d-ja-gva-91-191.dukascopy.com/194.8.15.191:10443], transport name [DDS2 Standalone Transport Client]
+2020-02-16 09:07:58.394 INFO  com.dukascopy.dds2.greed.market.LiveCurrencyMarketManager - LiveCurrencyMarketManager started.
+2020-02-16 09:07:58.859 INFO  singlejartest.Main - Connected
+2020-02-16 09:07:58.871 INFO  com.dukascopy.dds2.greed.agent.indicator.AccountProvider - Account representation: com.dukascopy.api.impl.connect.PlatformAccountImpl@3bfb0cdf[
+  currency=PLN
+  leverage=100.0
+  credit line=980640.0
+  equity=19550.74
+  balance=19593.99
+  base equity=19593.99
+  use of leverage=50.0
+  used margin=9744.340000000002
+  account state=OK
+  global=false
+  account id=1958578
+  instrument quotes={EUR=4.2499125818, GBP=5.1190816818, USD=3.92366, aUSD=3.94486620, bUSD=3.90246960, COPPER.CMD=10.195240672, bJPY=0.03554291231010237285088, aJPY=0.03595099016668337428536}
+  
+  Initial values:
+  margin mode=0
+  margin cut level=200
+  stop loss level=0.0
+  over the weekend leverage=30
+  currency precision=2
+  client ids=[1723066]
+  client info set=[Client ID = 1723066, State = OK, Equity = 19550.74, Stop Loss Level = 9871.80, Currency = PLN]
+]
+2020-02-16 09:07:58.880 INFO  singlejartest.Main - Subscribing instruments...
+2020-02-16 09:07:58.880 DEBUG com.dukascopy.api.impl.connect.DCClientImpl - Order group received for instrument [USD/JPY], adding instrument to the list of the subscribed instruments
+2020-02-16 09:07:58.891 INFO  singlejartest.Main - Starting strategy
+2020-02-16 09:07:58.897 DEBUG com.dukascopy.api.impl.connect.DCClientImpl - Order group received for instrument [COPPER.CMD/USD], adding instrument to the list of the subscribed instruments
+2020-02-16 09:07:58.907 DEBUG com.dukascopy.api.impl.connect.DCClientImpl - Order group received for instrument [GBP/USD], adding instrument to the list of the subscribed instruments
+2020-02-16 09:07:58.908 DEBUG com.dukascopy.api.impl.connect.DCClientImpl - Order group received for instrument [EUR/USD], adding instrument to the list of the subscribed instruments
+2020-02-16 09:07:58.912 DEBUG com.dukascopy.api.impl.connect.DCClientImpl - Unrecognized protocol message : class com.dukascopy.dds3.transport.msg.dfs.ServerTimeResponseMessage / <ServerTimeResponseMessage(serverTime=1581840478593,serverSystemTime=1581840478592,lastKnownTickTime=1581717596099,sessionId=053a166c-f83b-4e2b-98bf-9feb8b3a6913,userId=1958578,requestId=0,timestamp=1581840478592)>
+2020-02-16 09:07:58.990 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - SUBSCRIBED INSTRUMENTS: [COPPER.CMD/USD, EUR/USD, GBP/USD, USD/JPY]
+2020-02-16 09:07:58.990 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - FULL DEPTH INSTRUMENTS: [EUR/USD, USD/JPY]
+2020-02-16 09:07:58.991 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - FULL DEPTH INSTRUMENTS: [EUR/USD, USD/JPY]
+2020-02-16 09:07:58.993 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - SUBSCRIBED INSTRUMENTS: [COPPER.CMD/USD, EUR/USD, GBP/USD, USD/JPY]
+2020-02-16 09:07:58.993 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - FULL DEPTH INSTRUMENTS: [COPPER.CMD/USD, EUR/USD, USD/JPY]
+2020-02-16 09:07:58.995 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - SUBSCRIBED INSTRUMENTS: [COPPER.CMD/USD, EUR/USD, GBP/USD, USD/JPY]
+2020-02-16 09:07:58.995 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - FULL DEPTH INSTRUMENTS: [COPPER.CMD/USD, EUR/USD, GBP/USD, USD/JPY]
+2020-02-16 09:07:58.996 INFO  com.dukascopy.api.instrument.subscribe.InstrumentManager - FULL DEPTH INSTRUMENTS: [COPPER.CMD/USD, EUR/USD, GBP/USD, USD/JPY]
+2020-02-16 09:08:01.012 INFO  singlejartest.Main - Strategy started: 53
+2020-02-16 09:08:07.464 DEBUG com.dukascopy.api.impl.connect.ActivityLogger - jah : [{"datumType":"message","message":"Strategy \"Strategy2\" Strategy ID: 6F813254E630CC3E354F975D41247DDD is started at 2020-02-16 08:08:00.835 GMT on the local computer with no parameters","clientTime":"1581840480978","timestamp":"1581840480835"}]
+2020-02-16 09:08:07.826 DEBUG com.dukascopy.api.impl.connect.ActivityLogger - Trade Log (200) : https://demo-login.dukascopy.com/platformweb/export/tradeLog.php?check=fffd07fffdfffdfffd25fffd56fffd7bfffd3dfffd712efffd&login=DEMO2iLGsh&tzOffsetSeconds=-3600
