@@ -2,11 +2,14 @@ package singlejartest;
 
 import com.dukascopy.api.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Date;
+
+import static com.dukascopy.api.IOrder.State.FILLED;
+
 
 public class Strategy2 implements IStrategy {
+
     private IEngine engine;
     private IConsole console;
     private IHistory history;
@@ -14,10 +17,11 @@ public class Strategy2 implements IStrategy {
     private IIndicators indicators;
     private IUserInterface userInterface;
 
-
-    List<Double> mass = new ArrayList<Double>();
-    int[] massInt = new int[10];
-
+    double[] barsOpen = new double[4];
+    double[] barsClose = new double[4];
+    Date date = new Date();
+    boolean sellExist=false;
+    boolean buyExist=false;
 
     @Override
     public void onStart(IContext context) throws JFException {
@@ -27,62 +31,71 @@ public class Strategy2 implements IStrategy {
         this.context = context;
         this.indicators = context.getIndicators();
         this.userInterface = context.getUserInterface();
-        System.out.println("Start Strategy2 ///////////////////////////////");
 
-        ITick tick = history.getLastTick(Instrument.EURUSD);
-        System.out.println(tick);
-        System.out.println(tick.getAsk());
-        System.out.println(tick.getBid());
-        System.out.println(tick.getAskVolume());
-        System.out.println(tick.getTotalAskVolume());
-        System.out.println(tick.getTime());
-        System.out.println(context.getHistory().getTicks(Instrument.EURUSD,0,0));
-        System.out.println(history+"///////////////////////////");
+        console.getOut().println("Active orders: " + engine.getOrders());
+//        console.getOut().println("Pending orders: " + getPendingOrders());
+//        console.getOut().println("Orders in profit: " + getProfitOrders());
+//        console.getOut().println("Orders in loss: " + getLossOrders());
 
-//        double priceAsk = tick.getAsk() + 10 * Instrument.EURUSD.getPipValue();
-//        System.out.println(priceAsk);
-//        System.out.println(mass.add(priceAsk));
-//        if((mass.size()>=4) ){
-//            double t1= mass.get(mass.size()-1);
-//            double t2= mass.get(mass.size()-2);
-//            double t3= mass.get(mass.size()-3);
-//            if ((t1>t2 & t2>t3)&&((t1-t2)-(t2-t3)<0.0006)){
-//                double price2 = tick.getAsk() + 10 * Instrument.EURUSD.getPipValue();
-//                double stopLoss =history.getLastTick(Instrument.EURUSD).getAsk()+10 * Instrument.EURUSD.getPipValue();
-//                System.out.println(stopLoss);
-//                IOrder order2 = this.engine.submitOrder("sell", Instrument.EURUSD, IEngine.OrderCommand.SELL, 0.001, price2, 1, 0, 0);
-//                order2.waitForUpdate(3000, IOrder.State.OPENED);
-//            }
-//        }
     }
 
     @Override
     public void onTick(Instrument instrument, ITick tick) throws JFException {
-//        System.out.println("Start Strategy2 ///////////////////////////////");
-//        IContext context = null;
-//        this.history = context.getHistory();
-//        System.out.println(Instrument.values());
-//
-//        double priceAsk = tick.getAsk() + 10 * Instrument.EURUSD.getPipValue();
-//        System.out.println(mass.add(priceAsk));
-//        if((mass.size()>=4) ){
-//               double t1= mass.get(mass.size()-1);
-//               double t2= mass.get(mass.size()-2);
-//               double t3= mass.get(mass.size()-3);
-//               if ((t1>t2 & t2>t3)&&((t1-t2)-(t2-t3)<0.0006)){
-//                   double price2 = tick.getAsk() + 10 * Instrument.EURUSD.getPipValue();
-//                   double stopLoss =history.getLastTick(Instrument.EURUSD).getAsk()+10 * Instrument.EURUSD.getPipValue();
-//                   System.out.println(stopLoss);
-//                   IOrder order2 = this.engine.submitOrder("sell", Instrument.EURUSD, IEngine.OrderCommand.SELL, 0.001, price2, 1, 0, 0);
-//                   order2.waitForUpdate(3000, IOrder.State.OPENED);
-//               }
-//        }
+        //   System.out.println(" Tick..........."+history.getTick(instrument,1));
 
 
     }
 
     @Override
     public void onBar(Instrument instrument, Period period, IBar askBar, IBar bidBar) throws JFException {
+        instrument = Instrument.EURUSD;
+        IOrder order;
+        System.out.println("..............sellExist:"+sellExist+",   buyExist:"+buyExist+"..............");
+
+        for (int i = 0; i < 4; i++) {
+            barsOpen[i] = history.getBar(instrument, Period.ONE_MIN, OfferSide.BID, i).getOpen();
+            barsClose[i] = history.getBar(instrument, Period.ONE_MIN, OfferSide.BID, i).getClose();
+        }
+        System.out.println(Arrays.toString(barsOpen));
+        if (//barsOpen[0] < barsOpen[1] && barsOpen[1] < barsOpen[2]
+               // && barsClose[0] < barsClose[1] && barsClose[1] < barsClose[2]
+                barsOpen[0] < barsOpen[1]) {
+            console.getOut().println("........................Order   was created  SELL......................................" + date.toString());
+           for (IOrder orderLabel : engine.getOrders()) {
+                if (orderLabel.getLabel() == "sell") {
+                  sellExist=true;
+                }
+            }
+            if (sellExist==false){
+                ITick tick = history.getLastTick(Instrument.EURUSD);
+                double price = tick.getAsk() + 10 * Instrument.EURUSD.getPipValue();
+                order = engine.submitOrder("sell", instrument, IEngine.OrderCommand.SELL, 0.001,price,1,(price-5),(price+5));
+                order.waitForUpdate(2000, FILLED);
+               // sellExist=true;
+            }
+
+
+            console.getOut().println("S..............................................................S");
+        }sell:
+        if (//barsOpen[0] > barsOpen[1] && barsOpen[1] > barsOpen[2]
+              //  && barsClose[0] > barsClose[1] && barsClose[1] > barsClose[2]
+                barsOpen[0] > barsOpen[1] ) {
+            console.getOut().println("........................Order  was created  BUY......................................" + date.toString());
+            for (IOrder orderLabel : engine.getOrders()) {
+                if (orderLabel.getLabel() == "buy") {
+                    buyExist=true;
+                }
+            }
+            if (buyExist==false){
+                order = engine.submitOrder("buy", instrument, IEngine.OrderCommand.BUY, 0.001);
+                order.waitForUpdate(2000, FILLED);
+               // buyExist=true;
+            }
+
+
+            console.getOut().println("..............................................................");
+        }
+
 
     }
 
