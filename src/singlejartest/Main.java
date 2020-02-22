@@ -64,6 +64,7 @@ public class Main {
         LOGGER.info("Starting strategy");
        // client.startStrategy(new MA_Play());
         //now it's running
+        //Strategy  strategy = new Strategy ();
         Strategy2 strategy = new Strategy2();
         client.startStrategy(strategy);
 
