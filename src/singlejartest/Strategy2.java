@@ -43,6 +43,7 @@ public class Strategy2 implements IStrategy {
                 System.out.println("Buy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exist order Buy- " + buyExist);
             }
         }
+
     }
 
     @Override
@@ -59,53 +60,56 @@ public class Strategy2 implements IStrategy {
             barsOpen[i] = history.getBar(instrument, Period.ONE_MIN, OfferSide.BID, i).getOpen();
             barsClose[i] = history.getBar(instrument, Period.ONE_MIN, OfferSide.BID, i).getClose(); // array ( open i close ostatniech 4-rech barow)
         }
-        buyExist  = existPositionOrNotFlag("buy",buyExist);
-        sellExist = existPositionOrNotFlag("sell",sellExist);
-
+        buyExist = existPositionOrNotFlag("buy", buyExist);
+        sellExist = existPositionOrNotFlag("sell", sellExist);
 
 
         if (//barsOpen[0] < barsOpen[1] && barsOpen[1] < barsOpen[2]
             // && barsClose[0] < barsClose[1] && barsClose[1] < barsClose[2]
-                barsOpen[0] < barsOpen[1]) {
+                barsOpen[0] < barsOpen[1] && sellExist == false) {
 
-            openOrder(instrument,"sell");
+            openOrder(instrument, "sell");
         }
         if (//barsOpen[0] > barsOpen[1] && barsOpen[1] > barsOpen[2]
             //  && barsClose[0] > barsClose[1] && barsClose[1] > barsClose[2]
-                barsOpen[0] > barsOpen[1]) {
+                barsOpen[0] > barsOpen[1] && buyExist == false) {
 
-           openOrder(instrument,"buy");
+            openOrder(instrument, "buy");
         }
     }
 
-    private void openOrder(Instrument instrument,String labelSellOrBuy) throws JFException {
+    private void openOrder(Instrument instrument, String labelSellOrBuy) throws JFException {
         IOrder order;
         double slPrise = 0;
         double tpPrise = 0;
-        if (sellExist == false) {
-            System.out.println(Arrays.toString(barsOpen));
-            console.getOut().println("........................Order !!!"+labelSellOrBuy+"!!! was created ................." + date.toString());
-            ITick tick = history.getLastTick(instrument);
-            double price = tick.getAsk() + instrument.getPipValue();
-            if (labelSellOrBuy.equals("sell")){
-                 slPrise = price + instrument.getPipValue() * 2;
-                 tpPrise = price - instrument.getPipValue() * 2;
-            }
-            if (labelSellOrBuy.equals("buy")){
-                  slPrise = price - instrument.getPipValue() * 2;
-                  tpPrise = price + instrument.getPipValue() * 2;
-            }else {
-                System.out.println("Label for order doesn't exist, please check orderLabel");
-                return;
-            }
-            System.out.println("Prise: " + price + ", stopLoss: " + slPrise + ", takeProfit:" + tpPrise);
-            order = engine.submitOrder("sell", instrument, IEngine.OrderCommand.SELL, 0.001, 0, 20, slPrise, tpPrise);
-            System.out.println("price: " + price + ", slPrice: " + slPrise + ", pPrice: " + tpPrise);
-            order.waitForUpdate(2000, FILLED);
+        double price = 0;
+        IEngine.OrderCommand sellOrBuy;
+        System.out.println(Arrays.toString(barsOpen));
+        console.getOut().println("........................Order !!!" + labelSellOrBuy + "!!! was created ................." + date.toString());
+        ITick tick = history.getLastTick(instrument);
+
+        if (labelSellOrBuy.equals("sell")) {
+            price = tick.getAsk() + instrument.getPipValue();
+            slPrise = price + instrument.getPipValue() * 2;
+            tpPrise = price - instrument.getPipValue() * 2;
             sellExist = true;
-            System.out.println("..............sellExist:" + sellExist + ",   buyExist:" + buyExist + "..............");
-            console.getOut().println(labelSellOrBuy+".............................................................."+labelSellOrBuy);
+            sellOrBuy = IEngine.OrderCommand.SELL;
+        } else if (labelSellOrBuy.equals("buy")) {
+            price = tick.getBid() + instrument.getPipValue();
+            slPrise = price - instrument.getPipValue() * 2;
+            tpPrise = price + instrument.getPipValue() * 2;
+            buyExist = true;
+            sellOrBuy = IEngine.OrderCommand.BUY;
+        } else {
+            System.out.println("!!!!!!!!!  Label for order doesn't exist, please check orderLabel  !!!!!!!!");
+            return;
         }
+        order = engine.submitOrder(labelSellOrBuy, instrument, sellOrBuy, 0.001, 0, 20, slPrise, tpPrise);
+        System.out.println("price: " + price + ", slPrice: " + slPrise + ", pPrice: " + tpPrise);
+        order.waitForUpdate(2000, FILLED);
+        System.out.println("..............sellExist:" + sellExist + ",   buyExist:" + buyExist + "..............");
+        console.getOut().println(labelSellOrBuy + ".............................................................." + labelSellOrBuy);
+
     }
 
     private boolean existPositionOrNotFlag(String orderLabel, boolean flag) throws JFException {
@@ -119,7 +123,6 @@ public class Strategy2 implements IStrategy {
         }
         return flag;
     }
-
 
 
     @Override
