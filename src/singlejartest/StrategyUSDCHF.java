@@ -7,8 +7,7 @@ import java.util.Date;
 
 import static com.dukascopy.api.IOrder.State.FILLED;
 
-
-public class Strategy2 implements IStrategy {
+public class StrategyUSDCHF implements IStrategy {
 
     private IEngine engine;
     private IConsole console;
@@ -22,8 +21,8 @@ public class Strategy2 implements IStrategy {
     Date date = new Date();
     boolean sellExist = false;
     boolean buyExist = false;
-    private final static String sell = "sell";
-    private final static String buy = "buy";
+    private final static String sell = "sellUSDCHF";
+    private final static String buy = "buyUSDCHF";
 
     @Override
     public void onStart(IContext context) throws JFException {
@@ -36,11 +35,11 @@ public class Strategy2 implements IStrategy {
 
         console.getOut().println("Active orders: " + engine.getOrders());
         for (IOrder orderLabel : engine.getOrders()) { // показывает открыт ли ордер на продажу
-            if (orderLabel.getLabel().equals("sell")) {
+            if (orderLabel.getLabel().equals("sellUSDCHF")) {
                 sellExist = true;
                 System.out.println("Sell!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exist order Sell- " + sellExist);
             }
-            if (orderLabel.getLabel().equals("buy")) {
+            if (orderLabel.getLabel().equals("buyUSDCHF")) {
                 buyExist = true;
                 System.out.println("Buy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! exist order Buy- " + buyExist);
             }
@@ -111,13 +110,13 @@ public class Strategy2 implements IStrategy {
         console.getOut().println("........................Order !!!" + labelSellOrBuy + "!!! was created ................." + date.toString());
         ITick tick = history.getLastTick(instrument);
 
-        if (labelSellOrBuy.equals("sell")) {
+        if (labelSellOrBuy.equals("sellUSDCHF")) {
             // price = tick.getAsk() + instrument.getPipValue();
             slPrise = barsOpen[2];// + instrument.getPipValue() * 2;
             // tpPrise = price - instrument.getPipValue() * 2;
             sellExist = true;
             sellOrBuy = IEngine.OrderCommand.SELL;
-        } else if (labelSellOrBuy.equals("buy")) {
+        } else if (labelSellOrBuy.equals("buyUSDCHF")) {
             // price = tick.getBid() + instrument.getPipValue();
             slPrise = barsOpen[2]; // - instrument.getPipValue() * 2;
             // tpPrise = price + instrument.getPipValue() * 2;
@@ -140,9 +139,9 @@ public class Strategy2 implements IStrategy {
             if (orderL.getLabel().equals(orderLabel)) {
                 flag = true;
                 break;
+            } else {
+                flag = false;
             }
-            flag = false;
-
         }
         return flag;
     }
@@ -163,20 +162,3 @@ public class Strategy2 implements IStrategy {
 
     }
 }
-
-/*
- if (buyExist == false) {
-         System.out.println(Arrays.toString(barsOpen));
-         console.getOut().println("........................Order  was created  BUY........................" + date.toString());
-         ITick tick = history.getLastTick(instrument);
-         double price = tick.getAsk() + instrument.getPipValue();
-         double slPrise = price - instrument.getPipValue() * 2;
-         double tpPrise = price + instrument.getPipValue() * 2;
-         order = engine.submitOrder("buy", instrument, IEngine.OrderCommand.BUY, 0.001, 0, 20, slPrise, tpPrise);
-         System.out.println("price: " + price + ", slPrice: " + slPrise + ", pPrice: " + tpPrise);
-         double x = order.getOpenPrice() + priceDistance;
-         order.waitForUpdate(2000, FILLED);
-         buyExist = true;
-         System.out.println("..............sellExist:" + sellExist + ",   buyExist:" + buyExist + "..............");
-         console.getOut().println("B....................................................................B");
-         }*/

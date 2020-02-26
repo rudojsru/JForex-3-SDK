@@ -46,8 +46,8 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     private static String jnlpUrl = "http://platform.dukascopy.com/demo/jforex.jnlp";
-    private static String userName = "DEMO2iLGsh";
-    private static String password = "iLGsh";
+    private static String userName = "DEMO2rzpDW";
+    private static String password = "rzpDW";
 
     private static IClient client;
 
