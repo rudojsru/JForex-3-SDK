@@ -67,6 +67,8 @@ public class Main {
         //Strategy  strategy = new Strategy ();
         Strategy2 strategy = new Strategy2();
         client.startStrategy(strategy);
+        StrategyUSDCHF strategyUSDCHF = new StrategyUSDCHF();
+        client.startStrategy(strategyUSDCHF);
 
     }
 

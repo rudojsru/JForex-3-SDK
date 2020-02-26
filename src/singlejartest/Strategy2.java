@@ -58,17 +58,17 @@ public class Strategy2 implements IStrategy {
         instrument = Instrument.EURUSD;
         IOrder order;
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             barsOpen[i] = history.getBar(instrument, Period.ONE_MIN, OfferSide.BID, i).getOpen();
             barsClose[i] = history.getBar(instrument, Period.ONE_MIN, OfferSide.BID, i).getClose(); // array ( open i close ostatniech 4-rech barow)
         }
-        buyExist = existPositionOrNotFlag(buy, buyExist);
-        sellExist = existPositionOrNotFlag(sell, sellExist);
+        buyExist = existPositionOrNotFlag(buy);
+        sellExist = existPositionOrNotFlag(sell);
 
 
         if (barsOpen[0] < barsOpen[1] && barsOpen[1] < barsOpen[2]
                 && barsClose[0] < barsClose[1] && barsClose[1] < barsClose[2]
-                && sellExist == false) {
+                && sellExist == false ) {
 
             openOrder(instrument, sell);
         }
@@ -85,16 +85,16 @@ public class Strategy2 implements IStrategy {
     private void stopLossUpdateForExistOrder() throws JFException {
         IOrder order;
         System.out.println("......1........sellExist:" + sellExist + ",   buyExist:" + buyExist + "..............");
-        buyExist = existPositionOrNotFlag(buy, buyExist);
-        sellExist = existPositionOrNotFlag(sell, sellExist);
+        buyExist = existPositionOrNotFlag(buy);
+        sellExist = existPositionOrNotFlag(sell);
         System.out.println(".......2.......sellExist:" + sellExist + ",   buyExist:" + buyExist + "..............");
 
-        if (existPositionOrNotFlag(sell, sellExist) == true && (barsOpen[0] < barsOpen[1] && barsOpen[1] < barsOpen[2])) {
+        if (existPositionOrNotFlag(sell) == true && (barsOpen[0] < barsOpen[1] && barsOpen[1] < barsOpen[2])) {
             System.out.println("update");
             order = engine.getOrder(sell);
             order.setStopLossPrice(barsOpen[2]);
         }
-        if (existPositionOrNotFlag(buy, buyExist) == true && (barsOpen[0] > barsOpen[1] && barsOpen[1] > barsOpen[2])) {
+        if (existPositionOrNotFlag(buy) == true && (barsOpen[0] > barsOpen[1] && barsOpen[1] > barsOpen[2])) {
             System.out.println("update");
             order = engine.getOrder(buy);
             order.setStopLossPrice(barsOpen[2]);
@@ -135,14 +135,13 @@ public class Strategy2 implements IStrategy {
 
     }
 
-    private boolean existPositionOrNotFlag(String orderLabel, boolean flag) throws JFException {
+    private boolean existPositionOrNotFlag(String orderLabel) throws JFException {
+        boolean flag = false;
         for (IOrder orderL : engine.getOrders()) { // показывает открыт ли ордер на покупку или продажу
             if (orderL.getLabel().equals(orderLabel)) {
                 flag = true;
                 break;
             }
-            flag = false;
-
         }
         return flag;
     }
@@ -163,20 +162,3 @@ public class Strategy2 implements IStrategy {
 
     }
 }
-
-/*
- if (buyExist == false) {
-         System.out.println(Arrays.toString(barsOpen));
-         console.getOut().println("........................Order  was created  BUY........................" + date.toString());
-         ITick tick = history.getLastTick(instrument);
-         double price = tick.getAsk() + instrument.getPipValue();
-         double slPrise = price - instrument.getPipValue() * 2;
-         double tpPrise = price + instrument.getPipValue() * 2;
-         order = engine.submitOrder("buy", instrument, IEngine.OrderCommand.BUY, 0.001, 0, 20, slPrise, tpPrise);
-         System.out.println("price: " + price + ", slPrice: " + slPrise + ", pPrice: " + tpPrise);
-         double x = order.getOpenPrice() + priceDistance;
-         order.waitForUpdate(2000, FILLED);
-         buyExist = true;
-         System.out.println("..............sellExist:" + sellExist + ",   buyExist:" + buyExist + "..............");
-         console.getOut().println("B....................................................................B");
-         }*/

@@ -54,7 +54,7 @@ public class StrategyUSDCHF implements IStrategy {
 
     @Override
     public void onBar(Instrument instrument, Period period, IBar askBar, IBar bidBar) throws JFException {
-        instrument = Instrument.EURUSD;
+        instrument = Instrument.USDCHF;
         IOrder order;
 
         for (int i = 0; i < 4; i++) {
